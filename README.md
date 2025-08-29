@@ -1,26 +1,25 @@
-# Arabic Grammar Notes | ملاحظات قواعد اللغة العربية
+# 📚  Iraqies' Notes | ملاحظات واحد عراقي
 
-## English
+## 🌟 Current Notes | الملاحظات الحالية
 
-This project is a collection of **Arabic grammar notes** presented as simple HTML pages.  
-The goal is to make the lessons clear, easy to read, and available online for study and reference.
-
-🔗 Current lesson: [Rules of "ليس"](https://iraqies.github.io/Arabic/negation)
-
-More topics (verbs, nouns, pronouns, tenses, etc.) will be added gradually.
+- 📝 [Rules of "ليس"  قواعد "ليس" ](https://iraqies.github.io/Arabic/negation)
 
 ---
 
-## العربية
+## 🚀 Upcoming Lessons | الدروس القادمة
 
-هذا المشروع عبارة عن **ملاحظات لقواعد اللغة العربية** في صفحات HTML بسيطة.  
-الهدف هو جعل الدروس واضحة وسهلة القراءة ومتاحة عبر الإنترنت للدراسة والرجوع إليها.
-
-🔗 الدرس الحالي: [قواعد "ليس"](https://iraqies.github.io/Arabic/negation)
-
-وسيتم إضافة المزيد من المواضيع (الأفعال، الأسماء، الضمائر، الأزمنة... إلخ) تدريجياً.
+- ✨ Switch | التقديم والتأخير مع الفعل ليس  
+- ✨ And more… | وأكثر
 
 ---
 
-✍️ إعداد الطالب: **حسنين حميد مجيد حميد**
+## 💡 Notes | ملاحظات
+
+- All pages share the same **clean and responsive style**.  
+- Works on desktop and mobile.  
+- Pages are easy to expand as new topics are added.  
+
+---
+
+✍️ Prepared by: **حسنين حميد مجيد حميد**
 
