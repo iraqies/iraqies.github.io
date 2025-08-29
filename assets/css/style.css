@@ -1,0 +1,177 @@
+/* === Global Reset === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* === Body === */
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: #ffffff;
+    color: #333333;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* === Container === */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* === Header === */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.subtitle {
+    font-size: 20px;
+    font-weight: 500;
+    color: #7f8c8d;
+}
+
+/* === Rules Section === */
+.rule {
+    margin-bottom: 40px;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    border-left: 4px solid #3498db;
+}
+
+.rule-number {
+    background-color: #3498db;
+    color: white;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.rule-content {
+    font-size: 24px;
+    line-height: 2;
+    margin-bottom: 20px;
+    text-align: justify;
+    color: #2c3e50;
+}
+
+/* === Example Box === */
+.example {
+    background-color: #edf7ff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 1px solid #e1f0ff;
+}
+
+.example-title {
+    color: #2980b9;
+    font-weight: bold;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+/* === Arabic Text & Labels === */
+.arabic-text {
+    font-size: 26px;
+    line-height: 2.4;
+    text-align: center;
+    color: #2c3e50;
+}
+
+.text-container {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 6px;
+}
+
+.word {
+    display: block;
+    padding: 0 8px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 26px;
+}
+
+.underline {
+    display: block;
+    height: 2px;
+    background-color: #3498db;
+    margin-top: 4px;
+    width: 100%;
+}
+
+.label {
+    display: block;
+    font-size: 14px;
+    color: #3498db;
+    margin-top: 4px;
+    font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+}
+
+.normal-word {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 6px;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 8px;
+    font-size: 26px;
+}
+
+/* === Footer === */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #7f8c8d;
+    font-size: 16px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .rule-content, .arabic-text {
+        font-size: 20px;
+    }
+
+    .word, .normal-word {
+        font-size: 20px;
+    }
+}
+
