@@ -2,7 +2,7 @@
 
 ## 🌟 Current Notes | الملاحظات الحالية
 
-- 📝 [Rules of "ليس"  قواعد "ليس" ](https://iraqies.github.io/Arabic/negation)
+- 📝 [Rules of قواعد ليس](https://iraqies.github.io/Arabic/negation)
 
 ---
 
