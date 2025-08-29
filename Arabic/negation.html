@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قواعد ليس - الاجتماعات الخاصة بالاستاذ عقيل الزبيدي</title>
+    <title>قواعد ليس - ملاحظات اللغة العربية</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- External CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="lesson-container">
         <header>
-            <h1>اجتماعات الخاصة بعقيل الزبيدي</h1>
-            <p class="subtitle">أحكام "ليس" في اللغة العربية</p>
+            <h1>ملاحظات قواعد اللغة العربية</h1>
+            <p class="subtitle">أحكام "ليس"</p>
         </header>
-        
+
         <div class="rule">
             <div class="rule-number">1</div>
             <div class="rule-content">
@@ -126,11 +126,28 @@
                 </div>
             </div>
         </div>
-        
+
+        <!-- 📸 Screenshot Button -->
+        <div class="screenshot-btn">
+            <button onclick="takeScreenshot()">📸 حفظ الدرس كصورة</button>
+        </div>
+
         <div class="footer">
-            <p>اعداد الطالب : حسنين حميد مجيد حميد</p>
+            <p>إعداد الطالب : حسنين حميد مجيد حميد</p>
         </div>
     </div>
+
+    <!-- html2canvas library -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script>
+        function takeScreenshot() {
+            html2canvas(document.querySelector("#lesson-container")).then(canvas => {
+                const link = document.createElement("a");
+                link.download = "lesson.png";
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+    </script>
 </body>
 </html>
-
