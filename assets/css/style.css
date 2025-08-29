@@ -175,3 +175,23 @@ h1 {
     }
 }
 
+.screenshot-btn {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.screenshot-btn button {
+    background-color: #3498db;
+    color: #fff;
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: 'Tajawal', sans-serif;
+}
+
+.screenshot-btn button:hover {
+    background-color: #2980b9;
+}
