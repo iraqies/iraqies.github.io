@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My YouTube Archive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        :root {
+            --youtube-red: #FF0000;
+            --youtube-dark: #0F0F0F;
+            --youtube-dark-2: #181818;
+            --youtube-gray: #272727;
+            --youtube-light-gray: #F1F1F1;
+            --youtube-text: #FFFFFF;
+            --youtube-text-secondary: #AAAAAA;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            --transition-slow: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-fast: 0.2s ease;
+        }
+        
+        body {
+            background: var(--youtube-dark);
+            color: var(--youtube-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            height: 56px;
+            background: var(--youtube-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            color: var(--youtube-red);
+            font-size: 28px;
+            margin-right: 4px;
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--youtube-text);
+        }
+        
+        .archive-label {
+            font-size: 14px;
+            color: var(--youtube-text-secondary);
+            margin-left: 10px;
+            font-weight: 400;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .page-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 16px;
+            padding: 16px 16px 0;
+        }
+        
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+            padding: 16px;
+        }
+        
+        .channel-card {
+            background: var(--youtube-dark-2);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all var(--transition-slow);
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .channel-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .channel-banner {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            overflow: hidden;
+        }
+        
+        .channel-banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .channel-avatar-container {
+            position: absolute;
+            bottom: -40px;
+            left: 16px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        
+        .channel-avatar {
+            width: 74px;
+            height: 74px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--youtube-dark-2);
+        }
+        
+        .channel-info {
+            padding: 48px 16px 16px;
+        }
+        
+        .channel-name {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .channel-stats {
+            display: flex;
+            gap: 12px;
+            color: var(--youtube-text-secondary);
+            font-size: 14px;
+        }
+        
+        .content-view {
+            display: none;
+        }
+        
+        .channel-header {
+            position: relative;
+            width: 100%;
+            margin-bottom: 24px;
+        }
+        
+        .channel-header-banner {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .channel-header-info {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: var(--youtube-dark-2);
+        }
+        
+        .channel-header-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 16px;
+        }
+        
+        .channel-header-details h2 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .channel-header-details p {
+            color: var(--youtube-text-secondary);
+            font-size: 14px;
+        }
+        
+        .content-selection {
+            display: flex;
+            border-bottom: 1px solid var(--youtube-gray);
+            margin-bottom: 16px;
+            padding: 0 16px;
+        }
+        
+        .content-btn {
+            background: none;
+            border: none;
+            color: var(--youtube-text-secondary);
+            padding: 12px 16px;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.2s;
+        }
+        
+        .content-btn.active {
+            color: var(--youtube-text);
+        }
+        
+        .content-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--youtube-text);
+        }
+        
+        .content-btn:hover {
+            color: var(--youtube-text);
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+            padding: 0 16px 16px;
+        }
+        
+        .video-card {
+            background: transparent;
+            border-radius: 0;
+            overflow: hidden;
+            transition: all var(--transition-slow);
+            cursor: pointer;
+        }
+        
+        .video-card:hover {
+            transform: none;
+        }
+        
+        .thumbnail-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: #000;
+            border-radius: 12px;
+        }
+        
+        /* Regular videos (16:9 aspect ratio) */
+        .thumbnail-container.video {
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        
+        /* Shorts (9:16 aspect ratio) */
+        .thumbnail-container.short {
+            padding-top: 177.78%; /* 9:16 Aspect Ratio */
+        }
+        
+        .thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .video-card:hover .thumbnail {
+            transform: scale(1.08);
+            border-radius: 12px;
+        }
+        
+        .video-duration {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .video-info {
+            padding: 12px 0;
+        }
+        
+        .video-title {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.4;
+            margin-bottom: 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .video-meta {
+            font-size: 12px;
+            color: var(--youtube-text-secondary);
+        }
+        
+        .back-btn {
+            background: var(--youtube-gray);
+            border: none;
+            color: var(--youtube-text);
+            padding: 8px 16px;
+            border-radius: 18px;
+            cursor: pointer;
+            margin: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #3d3d3d;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 32px 16px;
+            margin-top: 40px;
+            color: var(--youtube-text-secondary);
+            font-size: 14px;
+            border-top: 1px solid var(--youtube-gray);
+        }
+        
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            font-size: 16px;
+            color: var(--youtube-text-secondary);
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--youtube-red);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive design */
+        @media (max-width: 1200px) {
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .channels-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .channel-header-info {
+                flex-direction: column;
+                text-align: center;
+                padding: 24px 16px;
+            }
+            
+            .channel-header-avatar {
+                margin-right: 0;
+                margin-bottom: 16px;
+            }
+            
+            .channel-banner {
+                height: 100px;
+            }
+            
+            .channel-avatar-container {
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: -30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            .archive-label {
+                display: none;
+            }
+            
+            .channel-header-banner {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">
+            <div class="logo-icon"><i class="fab fa-youtube"></i></div>
+            <div class="logo-text">YouTube</div>
+            <div class="archive-label">Archive</div>
+        </a>
+    </header>
+    
+    <div class="container">
+        <div id="channels-view">
+            <h1 class="page-title">My YouTube Channels</h1>
+            <div class="channels-grid" id="channels-grid">
+                <!-- Channels will be loaded here -->
+            </div>
+        </div>
+        
+        <div id="content-view" class="content-view">
+            <button class="back-btn" id="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Channels
+            </button>
+            
+            <div class="channel-header">
+                <img id="channel-banner" class="channel-header-banner" src="" alt="Channel Banner">
+                <div class="channel-header-info">
+                    <img id="channel-avatar" class="channel-header-avatar" src="" alt="Channel Avatar">
+                    <div class="channel-header-details">
+                        <h2 id="channel-name">Channel Name</h2>
+                        <p id="channel-stats">0 Videos • 0 Shorts</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-selection" id="content-selection">
+                <button class="content-btn active" data-type="videos">Videos</button>
+                <button class="content-btn" data-type="shorts">Shorts</button>
+            </div>
+            
+            <div class="video-grid" id="videos-grid">
+                <!-- Videos will be loaded here -->
+            </div>
+            
+            <div class="video-grid" id="shorts-grid">
+                <!-- Shorts will be loaded here -->
+            </div>
+        </div>
+        
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <div>Loading your channels...</div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 YouTube Video Archive</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const channelsGrid = document.getElementById('channels-grid');
+            const videosGrid = document.getElementById('videos-grid');
+            const shortsGrid = document.getElementById('shorts-grid');
+            const loadingElement = document.getElementById('loading');
+            const channelsView = document.getElementById('channels-view');
+            const contentView = document.getElementById('content-view');
+            const contentSelection = document.getElementById('content-selection');
+            const backButton = document.getElementById('back-button');
+            const contentButtons = document.querySelectorAll('.content-btn');
+            
+            // Channel elements
+            const channelBanner = document.getElementById('channel-banner');
+            const channelAvatar = document.getElementById('channel-avatar');
+            const channelName = document.getElementById('channel-name');
+            const channelStats = document.getElementById('channel-stats');
+            
+            // Extract video IDs from URLs
+            function extractVideoId(url) {
+                // Handle full YouTube URLs
+                if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                    const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([^&]+)/);
+                    return match ? match[1] : url;
+                }
+                // Assume it's already a video ID
+                return url;
+            }
+            
+            // Channel data with videos and shorts (newest first)
+            const channels = [
+                {
+                    id: 'iraqies',
+                    name: 'Iraqies',
+                    avatar: 'https://yt3.googleusercontent.com/7GIOgwjRlifnRa5v3zdNra_J5cJtJ8GBoUULr8OSlPhpz01rpobqYwgo59bAJlIkaG9h0KCs=s160-c-k-c0x00ffffff-no-rj',
+                    banner: 'https://yt3.googleusercontent.com/FI_TGNFMAXwbnJlLnYDx0i2lVMP1vvwHxJ__rS8lBEEKe7Hu7Ipvyl1dg1JnPf8-WH058XX7Ew=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj',
+                    videos: [
+                        '-PMqCojKTmU', '5fvoLi-3-QA', 'gSS10fJAERM', 'fDt_cTTyIgg', 'PynDTzEZ6rs',
+                        'a9OKTK7fJIU', '99Gcxuo5BWE', 'CxUFidh9PbY', '4UOXKcFV8PY', 'EbVJ8wj4td4',
+                        'TJLYW7rteU4', 'Gw9PrzBaCEI', 'ICSvsNrJ3XU', 'OyLcXeIFozE', 'M6ri2xhpZt0',
+                        '96yMhLtVu8s', '7Fz1eiLrkMA', 'ZhoqTAYAZ3I'
+                    ],
+                    shorts: [
+                        'VzREPYIln1o', 'op1Kcysz-nE', 'GzcFkF6IPPI', 'nDWGaqW--s0', 'MAyMtfI6Udk',
+                        'YrS0X6PPVOI', 'hWKl_DrgJd4', 'LM3Kwa0NClg', '6SG1TxOTf00', 'N4dVNc_GXAM',
+                        'q33HJkZ993U', 'olLqflnzio0', 'PWemI_FviYY', 'SlBIl2P8rmI', 'M3plhQ9oeKU',
+                        'x2RAGiNNTEc', 'jauM7zOPJdw', 'GMSygJ7iBF4', 'jFC12iQdxNc', 'k_6U3sHrjMY'
+                    ]
+                },
+                {
+                    id: 'irxqi',
+                    name: 'IRXQI',
+                    avatar: 'https://yt3.googleusercontent.com/kfJrgIYAmdd_lgQ_KMRrr7U6guGr-rjQMqvHECdFM8WIWO2lTb9fl3nJLiSpREX_2IIjAizh=s160-c-k-c0x00ffffff-no-rj',
+                    banner: 'https://yt3.googleusercontent.com/i-UVajmkpjsVyLC2Q5o2DaF2F0SMDQFdm0iYUl68JJlVjMWb7MG9ZXvgzkQXAU6lqXo9Qn_Liok=w2120-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj',
+                    // Reversed order for IRXQI videos (newest first)
+                    videos: [
+                        'tPa5JoNC7dw', 'TMHIZg22OMQ', 'Fw__NN079Xk', 'KWV6h6vkYOU', 'F46nCsZIjRo',
+                        'rEPBks6J4CY', 'TTFggga6Uo4', 't8DviDY5UUk', 'mgK3895rh6Y', '_cN_CULzuZk',
+                        'M4o77yXPXgw', 'FvN8WzlQxzg', '2bH-LD3Nr4M', 'nPtXSlfAQqw', 'ua1eWbPOE74',
+                        'F2t3mffHmVY', 'KFmGPWDgUMY', '2uawHCz9y_0', 'y_hYtfANGE0', 'Pc9bLg6hFsw',
+                        'xojSp1ExqzY', 'g76JrjWCkV8', 'Y0L_HWoVDUs', 'aC7YGcFUGWk', 'bmN_vV5W4X0',
+                        'som4dOAArcI', 'fGkJDnp4PlQ', 'lpPxTeAk0rk', 'wg2mrhTRu80', 'EErEb_0IfBs'
+                    ].map(extractVideoId),
+                    // Reversed order for IRXQI shorts (newest first)
+                    shorts: [
+                        'oPmYLGYrg9Q', 'NDSDwPE2Buo', '1LQYuBUH8rQ', 'V-iEbXbOZyA', '5gS-vfZ_dfw',
+                        '5qoBW-yQ4FE', 'NQfd_4pz61o', 'uj3o4UHZJ2c', 'Wpfmp4uuQfc', 'Y-5UI6ibCyU',
+                        'MVrEhSSqvIc', '03PSArVlS2k', '3Hz7tOm5PpY', 'l21hmh7pkCA', 'MPPkk6shAls',
+                        'lFl_7FD4saI', 'a1yxmKq82mg', 'BFdDgj4LAD4', 'XZNRPGpUvHY', 'zQUMrjzCTR4',
+                        '1IsotPFmcfs', 'kT3DhihX0IQ', 'G_LyNvBwO1M', 'jgdeedxWGEc', 'iOUzi68MdD0',
+                        'djwRLdcsToU', 'HUk2b96aDtw', 'PhtiXpsa6Tc', 'R5-0dLefDQM', '9zswFFI3t6s',
+                        'p8PLTi6i9qM', 'UQTq5fq5i8k', '5HFQ8xN5vgQ', 'WKALJQFEArk', 'v215Iywuj9k',
+                        'p0P94UU3nkY', 'EUG6aEXEyvk', 'xvdGZ2gJu34', 'LfM-J7U0WYI', 'D-z7Pte24oo',
+                        'hEDawjIkG2U', 'ciU6jOLfKQU', 'TbbPCDSiDRA', '7wR43BYMD_U', 'EekylvS7fS4',
+                        '6qSihIobXmg', 'qNKTahL_vjM', 'aIjor5z6S_4', 'Cd2R2AYRUFQ', 'WqxmNGcN6Ds'
+                    ].map(extractVideoId)
+                },
+                {
+                    id: 'iraqifr',
+                    name: 'Iraqies - Gaming',
+                    avatar: 'https://yt3.googleusercontent.com/F4nVJNA5EWcjPd0RoLzcLqPzwA6C27M24EOcC3w8TbQfWkufAssy95ecp16s_TbjkCYoO6ZZ=s160-c-k-c0x00ffffff-no-rj',
+                    banner: 'https://yt3.googleusercontent.com/kBlg-MwkhFDWlA9I0zGj4cGx-oXcFGTQFVAtnHhxEa_fi0-0XgWjQ3D6ngxtU7_ZarVUh6D95TU=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj',
+                    videos: [
+                        'NFIQwaLqKcY', '0RDhGcKRPZI', 'xZO0FFhac2M'
+                    ].map(extractVideoId),
+                    shorts: [
+                        '7WXIjqQcUXw'
+                    ].map(extractVideoId)
+                }
+            ];
+
+            // Cache for video titles to avoid repeated API calls
+            const videoTitleCache = {};
+            
+            // Function to fetch video title using oEmbed
+            async function fetchVideoTitle(videoId, isShort = false) {
+                // Check cache first
+                if (videoTitleCache[videoId]) {
+                    return videoTitleCache[videoId];
+                }
+                
+                try {
+                    const url = isShort ? 
+                        `https://www.youtube.com/shorts/${videoId}` : 
+                        `https://www.youtube.com/watch?v=${videoId}`;
+                    
+                    const response = await fetch(`https://www.youtube.com/oembed?url=${url}&format=json`);
+                    
+                    if (!response.ok) {
+                        throw new Error('oEmbed request failed');
+                    }
+                    
+                    const data = await response.json();
+                    videoTitleCache[videoId] = data.title;
+                    return data.title;
+                } catch (error) {
+                    console.error('Error fetching video title:', error);
+                    return isShort ? `YouTube Short` : `YouTube Video`;
+                }
+            }
+            
+            // Function to create channel card
+            function createChannelCard(channel) {
+                const card = document.createElement('div');
+                card.className = 'channel-card';
+                card.dataset.channelId = channel.id;
+                
+                card.innerHTML = `
+                    <div class="channel-banner">
+                        <img src="${channel.banner}" alt="${channel.name} Banner" class="channel-banner-img">
+                        <div class="channel-avatar-container">
+                            <img src="${channel.avatar}" alt="${channel.name}" class="channel-avatar">
+                        </div>
+                    </div>
+                    <div class="channel-info">
+                        <h3 class="channel-name">${channel.name}</h3>
+                        <div class="channel-stats">
+                            <span>${channel.videos.length} Videos</span>
+                            <span>${channel.shorts.length} Shorts</span>
+                        </div>
+                    </div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    showChannelContent(channel);
+                });
+                
+                return card;
+            }
+            
+            // Function to create video card
+            async function createVideoCard(videoId, isShort = false) {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                
+                const url = isShort ? `https://www.youtube.com/shorts/${videoId}` : `https://www.youtube.com/watch?v=${videoId}`;
+                
+                card.addEventListener('click', () => {
+                    window.open(url, '_blank');
+                });
+                
+                // Fetch the actual video title
+                const title = await fetchVideoTitle(videoId, isShort);
+                
+                // Use different aspect ratio for shorts
+                const aspectRatioClass = isShort ? 'short' : 'video';
+                
+                card.innerHTML = `
+                    <div class="thumbnail-container ${aspectRatioClass}">
+                        <img src="https://i.ytimg.com/vi/${videoId}/hqdefault.jpg" alt="${title}" class="thumbnail">
+                        <div class="video-duration">${isShort ? 'SHORT' : 'VIDEO'}</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">${title}</h3>
+                        <div class="video-meta">${isShort ? 'Short' : 'Video'}</div>
+                    </div>
+                `;
+                
+                return card;
+            }
+            
+            // Function to show channel content
+            async function showChannelContent(channel) {
+                channelsView.style.display = 'none';
+                contentView.style.display = 'block';
+                
+                // Update channel header
+                channelBanner.src = channel.banner;
+                channelAvatar.src = channel.avatar;
+                channelName.textContent = channel.name;
+                channelStats.textContent = `${channel.videos.length} Videos • ${channel.shorts.length} Shorts`;
+                
+                // Show loading
+                loadingElement.style.display = 'flex';
+                
+                // Clear previous content
+                videosGrid.innerHTML = '';
+                shortsGrid.innerHTML = '';
+                
+                try {
+                    // Add videos (newest first)
+                    for (const videoId of channel.videos) {
+                        const videoCard = await createVideoCard(videoId, false);
+                        videosGrid.appendChild(videoCard);
+                    }
+                    
+                    // Add shorts (newest first)
+                    for (const shortId of channel.shorts) {
+                        const shortCard = await createVideoCard(shortId, true);
+                        shortsGrid.appendChild(shortCard);
+                    }
+                    
+                    loadingElement.style.display = 'none';
+                    
+                    // Show videos by default
+                    videosGrid.style.display = 'grid';
+                    shortsGrid.style.display = 'none';
+                } catch (error) {
+                    console.error('Error loading channel content:', error);
+                    loadingElement.style.display = 'none';
+                }
+            }
+            
+            // Back button functionality
+            backButton.addEventListener('click', () => {
+                contentView.style.display = 'none';
+                channelsView.style.display = 'block';
+            });
+            
+            // Content type selection
+            contentButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    contentButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    if (button.dataset.type === 'videos') {
+                        videosGrid.style.display = 'grid';
+                        shortsGrid.style.display = 'none';
+                    } else {
+                        videosGrid.style.display = 'none';
+                        shortsGrid.style.display = 'grid';
+                    }
+                });
+            });
+            
+            // Load all channels
+            function loadChannels() {
+                // Hide loading indicator
+                loadingElement.style.display = 'none';
+                
+                // Create and append channel cards
+                channels.forEach(channel => {
+                    const card = createChannelCard(channel);
+                    channelsGrid.appendChild(card);
+                });
+            }
+            
+            // Start loading channels
+            loadChannels();
+        });
+    </script>
+</body>
+</html>
