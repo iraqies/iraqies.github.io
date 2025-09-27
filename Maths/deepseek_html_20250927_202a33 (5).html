@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigonometric Identities Cheat Sheet</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            color: #333;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+        
+        body.fit-to-page {
+            padding: 15px;
+            max-width: 100%;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 25px;
+            background: linear-gradient(90deg, #2c3e50, #3498db);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        
+        body.fit-to-page .header {
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        body.fit-to-page h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+        }
+        
+        body.fit-to-page .subtitle {
+            font-size: 1.2rem;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .fit-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .fit-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        body.fit-to-page .container {
+            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+        
+        .group {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        body.fit-to-page .group {
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .group:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.18);
+        }
+        
+        .group-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 4px solid #2c3e50;
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        body.fit-to-page .group-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+        }
+        
+        .identity {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            background-color: #f8fafc;
+            border-left: 6px solid #2c3e50;
+            line-height: 1.4;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        body.fit-to-page .identity {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            padding: 15px;
+        }
+        
+        .identity:hover {
+            background-color: #e8f4fd;
+            transform: scale(1.02);
+        }
+        
+        .identity.derived {
+            border-left: 6px solid #e74c3c;
+        }
+        
+        /* Color coding for trigonometric functions */
+        .sin { color: #e74c3c; font-weight: 700; }        /* Bright Red for sin */
+        .cos { color: #2980b9; font-weight: 700; }        /* Bright Blue for cos */
+        .tan { color: #f39c12; font-weight: 700; }        /* Bright Orange for tan */
+        .csc { color: #8e44ad; font-weight: 700; }        /* Bright Purple for csc */
+        .sec { color: #16a085; font-weight: 700; }        /* Bright Teal for sec */
+        .cot { color: #d35400; font-weight: 700; }        /* Bright Dark Orange for cot */
+        
+        .number { color: #2c3e50; font-weight: 700; }     /* Dark Blue-Gray for numbers */
+        .variable { color: #2c3e50; font-weight: 700; }   /* Dark Blue-Gray for variables */
+        .operator, .bracket, .equals { 
+            color: #000000; 
+            font-weight: 700;
+        } /* Black for operators, brackets, equals */
+        
+        .exponent {
+            font-size: 1.4rem;
+            vertical-align: super;
+            margin-left: 1px;
+        }
+        
+        body.fit-to-page .exponent {
+            font-size: 1.1rem;
+        }
+        
+        .subgroup {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f5f9;
+            border-radius: 10px;
+            border: 2px dashed #cbd5e1;
+            transition: all 0.3s ease;
+        }
+        
+        body.fit-to-page .subgroup {
+            margin-top: 15px;
+            padding: 10px;
+        }
+        
+        .subgroup-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        
+        body.fit-to-page .subgroup-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .fraction {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 4px;
+        }
+        
+        .numerator {
+            display: block;
+            border-bottom: 2px solid #2c3e50;
+            padding: 0 5px;
+        }
+        
+        .denominator {
+            display: block;
+            padding: 0 5px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px;
+            font-style: italic;
+            color: #4a5568;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        body.fit-to-page .footer {
+            margin-top: 30px;
+            padding: 15px;
+            font-size: 1rem;
+        }
+        
+        .color-key {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        body.fit-to-page .color-key {
+            margin-top: 20px;
+            padding: 10px;
+            gap: 10px;
+        }
+        
+        .color-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        body.fit-to-page .color-item {
+            font-size: 1rem;
+            margin: 3px 8px;
+        }
+        
+        .color-swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        body.fit-to-page .color-swatch {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+        }
+        
+        /* Tooltip styles */
+        .tooltip {
+            position: absolute;
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            width: 500px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            top: -20px;
+            left: 50%;
+            transform: translate(-50%, -100%);
+        }
+        
+        body.fit-to-page .tooltip {
+            width: 450px;
+            font-size: 1.1rem;
+            padding: 15px;
+        }
+        
+        .tooltip:after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px 10px 0 10px;
+            border-style: solid;
+            border-color: #2c3e50 transparent transparent transparent;
+        }
+        
+        .identity:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .tooltip-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #3498db;
+            font-size: 1.3rem;
+        }
+        
+        body.fit-to-page .tooltip-title {
+            font-size: 1.2rem;
+        }
+        
+        .credits {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+        
+        .credits a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .credits a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        .derivative-section {
+            margin-top: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            padding: 25px;
+        }
+        
+        .derivative-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 4px solid #2c3e50;
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+            letter-spacing: 0.5px;
+        }
+        
+        .derivative-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .derivative-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .arrow {
+            font-size: 1.6rem;
+            margin: 0 10px;
+            color: #2c3e50;
+        }
+        
+        .trig-function {
+            display: inline-block;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .identity {
+                font-size: 1.6rem;
+            }
+            
+            .color-key {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tooltip {
+                width: 350px;
+                font-size: 1rem;
+            }
+            
+            body.fit-to-page .tooltip {
+                width: 300px;
+            }
+            
+            .derivative-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tooltip {
+                width: 300px;
+                font-size: 0.9rem;
+            }
+            
+            body.fit-to-page .tooltip {
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Trigonometric Identities</h1>
+        <div class="subtitle">Color-Coded with Interactive Derivations</div>
+    </div>
+    
+    <div class="controls">
+        <button class="fit-button" id="fitButton">Fit to Page View</button>
+    </div>
+    
+    <div class="container">
+        <div class="group">
+            <h2 class="group-title">Reciprocal Identities</h2>
+            <div class="identity" id="tan-identity">
+                <span class="tan">tan</span><span class="variable">x</span> 
+                <span class="equals">=</span> 
+                <span class="fraction">
+                    <span class="numerator"><span class="sin">sin</span><span class="variable">x</span></span>
+                    <span class="denominator"><span class="cos">cos</span><span class="variable">x</span></span>
+                </span>
+                <div class="tooltip">
+                    <div class="tooltip-title">Derivation:</div>
+                    <p>By definition, tan x = opposite/adjacent in a right triangle.</p>
+                    <p>Since sin x = opposite/hypotenuse and cos x = adjacent/hypotenuse,</p>
+                    <p>tan x = (opposite/hypotenuse) / (adjacent/hypotenuse) = opposite/adjacent = sin x / cos x</p>
+                </div>
+            </div>
+            <div class="identity" id="cot-identity">
+                <span class="cot">cot</span><span class="variable">x</span> 
+                <span class="equals">=</span> 
+                <span class="fraction">
+                    <span class="numerator"><span class="cos">cos</span><span class="variable">x</span></span>
+                    <span class="denominator"><span class="sin">sin</span><span class="variable">x</span></span>
+                </span>
+                <div class="tooltip">
+                    <div class="tooltip-title">Derivation:</div>
+                    <p>cot x is the reciprocal of tan x.</p>
+                    <p>Since tan x = sin x / cos x,</p>
+                    <p>cot x = 1 / tan x = 1 / (sin x / cos x) = cos x / sin x</p>
+                </div>
+            </div>
+            <div class="identity" id="sec-identity">
+                <span class="sec">sec</span><span class="variable">x</span> 
+                <span class="equals">=</span> 
+                <span class="fraction">
+                    <span class="numerator"><span class="number">1</span></span>
+                    <span class="denominator"><span class="cos">cos</span><span class="variable">x</span></span>
+                </span>
+                <div class="tooltip">
+                    <div class="tooltip-title">Derivation:</div>
+                    <p>By definition, sec x is the reciprocal of cos x.</p>
+                    <p>In a right triangle, cos x = adjacent/hypotenuse,</p>
+                    <p>so sec x = hypotenuse/adjacent = 1 / cos x</p>
+                </div>
+            </div>
+            <div class="identity" id="csc-identity">
+                <span class="csc">csc</span><span class="variable">x</span> 
+                <span class="equals">=</span> 
+                <span class="fraction">
+                    <span class="numerator"><span class="number">1</span></span>
+                    <span class="denominator"><span class="sin">sin</span><span class="variable">x</span></span>
+                </span>
+                <div class="tooltip">
+                    <div class="tooltip-title">Derivation:</div>
+                    <p>By definition, csc x is the reciprocal of sin x.</p>
+                    <p>In a right triangle, sin x = opposite/hypotenuse,</p>
+                    <p>so csc x = hypotenuse/opposite = 1 / sin x</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="group">
+            <h2 class="group-title">Pythagorean Identities</h2>
+            <div class="identity" id="pythagorean-main">
+                <span class="sin">sin</span><span class="exponent variable">²</span><span class="variable">x</span> 
+                <span class="operator">+</span> 
+                <span class="cos">cos</span><span class="exponent variable">²</span><span class="variable">x</span> 
+                <span class="equals">=</span> 
+                <span class="number">1</span>
+                <div class="tooltip">
+                    <div class="tooltip-title">Derivation:</div>
+                    <p>From the Pythagorean theorem in a unit circle:</p>
+                    <p>For any point (cos x, sin x) on the unit circle,</p>
+                    <p>(cos x)² + (sin x)² = 1 (since radius = 1)</p>
+                    <p>Thus, sin²x + cos²x = 1</p>
+                </div>
+            </div>
+            <div class="identity derived" id="pythagorean-csc">
+                <span class="csc">csc</span><span class="exponent variable">²</span><span class="variable">x</span> 
+                <span class="operator">-</span> 
+                <span class="cot">cot</span><span class="exponent variable">²</span><span class="variable">x</span> 
+                <span class="equals">=</span> 
+                <span class="number">1</span>
+                <div class="tooltip">
+                    <div class="tooltip-title">Derivation from sin²x + cos²x = 1:</div>
+                    <p>Start with sin²x + cos²x = 1</p>
+                    <p>Divide both sides by sin²x:</p>
+                    <p>(sin²x/sin²x) + (cos²x/sin²x) = 1/sin²x</p>
+                    <p>1 + cot²x = csc²x</p>
+                    <p>Rearrange: csc²x - cot²x = 1</p>
+                </div>
+            </div>
+            <div class="identity derived" id="pythagorean-sec">
+                <span class="sec">sec</span><span class="exponent variable">²</span><span class="variable">x</span> 
+                <span class="operator">-</span> 
+                <span class="tan">tan</span><span class="exponent variable">²</span><span class="variable">x</span> 
+                <span class="equals">=</span> 
+                <span class="number">1</span>
+                <div class="tooltip">
+                    <div class="tooltip-title">Derivation from sin²x + cos²x = 1:</div>
+                    <p>Start with sin²x + cos²x = 1</p>
+                    <p>Divide both sides by cos²x:</p>
+                    <p>(sin²x/cos²x) + (cos²x/cos²x) = 1/cos²x</p>
+                    <p>tan²x + 1 = sec²x</p>
+                    <p>Rearrange: sec²x - tan²x = 1</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="group">
+            <h2 class="group-title">Power-Reducing Formulas</h2>
+            <div class="identity derived" id="power-cos">
+                <span class="cos">cos</span><span class="exponent variable">²</span><span class="variable">x</span> 
+                <span class="equals">=</span> 
+                <span class="fraction">
+                    <span class="numerator number">1</span>
+                    <span class="denominator number">2</span>
+                </span>
+                <span class="bracket">(</span>
+                <span class="number">1</span> 
+                <span class="operator">+</span> 
+                <span class="cos">cos</span><span class="number">2</span><span class="variable">x</span>
+                <span class="bracket">)</span>
+                <div class="tooltip">
+                    <div class="tooltip-title">Derivation from cos(2x) formulas:</div>
+                    <p>Start with cos(2x) = 2cos²x - 1</p>
+                    <p>Solve for cos²x:</p>
+                    <p>2cos²x = 1 + cos(2x)</p>
+                    <p>cos²x = (1 + cos(2x)) / 2</p>
+                </div>
+            </div>
+            <div class="identity derived" id="power-sin">
+                <span class="sin">sin</span><span class="exponent variable">²</span><span class="variable">x</span> 
+                <span class="equals">=</span> 
+                <span class="fraction">
+                    <span class="numerator number">1</span>
+                    <span class="denominator number">2</span>
+                </span>
+                <span class="bracket">(</span>
+                <span class="number">1</span> 
+                <span class="operator">-</span> 
+                <span class="cos">cos</span><span class="number">2</span><span class="variable">x</span>
+                <span class="bracket">)</span>
+                <div class="tooltip">
+                    <div class="tooltip-title">Derivation from cos(2x) formulas:</div>
+                    <p>Start with cos(2x) = 1 - 2sin²x</p>
+                    <p>Solve for sin²x:</p>
+                    <p>2sin²x = 1 - cos(2x)</p>
+                    <p>sin²x = (1 - cos(2x)) / 2</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="group">
+            <h2 class="group-title">Double Angle Formulas</h2>
+            <div class="identity" id="double-sin">
+                <span class="sin">sin</span><span class="number">2</span><span class="variable">x</span> 
+                <span class="equals">=</span> 
+                <span class="number">2</span>
+                <span class="sin">sin</span><span class="variable">x</span>
+                <span class="cos">cos</span><span class="variable">x</span>
+                <div class="tooltip">
+                    <div class="tooltip-title">Derivation from angle addition formula:</div>
+                    <p>Using sin(A+B) = sinA cosB + cosA sinB</p>
+                    <p>Set A = x and B = x:</p>
+                    <p>sin(x+x) = sinx cosx + cosx sinx</p>
+                    <p>sin(2x) = 2 sinx cosx</p>
+                </div>
+            </div>
+            
+            <div class="subgroup">
+                <div class="subgroup-title">cos2x variations:</div>
+                <div class="identity" id="double-cos1">
+                    <span class="cos">cos</span><span class="number">2</span><span class="variable">x</span> 
+                    <span class="equals">=</span> 
+                    <span class="cos">cos</span><span class="exponent variable">²</span><span class="variable">x</span> 
+                    <span class="operator">-</span> 
+                    <span class="sin">sin</span><span class="exponent variable">²</span><span class="variable">x</span>
+                    <div class="tooltip">
+                        <div class="tooltip-title">Derivation from angle addition formula:</div>
+                        <p>Using cos(A+B) = cosA cosB - sinA sinB</p>
+                        <p>Set A = x and B = x:</p>
+                        <p>cos(x+x) = cosx cosx - sinx sinx</p>
+                        <p>cos(2x) = cos²x - sin²x</p>
+                    </div>
+                </div>
+                <div class="identity derived" id="double-cos2">
+                    <span class="cos">cos</span><span class="number">2</span><span class="variable">x</span> 
+                    <span class="equals">=</span> 
+                    <span class="number">1</span> 
+                    <span class="operator">-</span> 
+                    <span class="number">2</span>
+                    <span class="sin">sin</span><span class="exponent variable">²</span><span class="variable">x</span>
+                    <div class="tooltip">
+                        <div class="tooltip-title">Derivation from cos²x - sin²x:</div>
+                        <p>Start with cos(2x) = cos²x - sin²x</p>
+                        <p>Replace cos²x with (1 - sin²x) from sin²x + cos²x = 1:</p>
+                        <p>cos(2x) = (1 - sin²x) - sin²x</p>
+                        <p>cos(2x) = 1 - 2sin²x</p>
+                    </div>
+                </div>
+                <div class="identity derived" id="double-cos3">
+                    <span class="cos">cos</span><span class="number">2</span><span class="variable">x</span> 
+                    <span class="equals">=</span> 
+                    <span class="number">2</span>
+                    <span class="cos">cos</span><span class="exponent variable">²</span><span class="variable">x</span> 
+                    <span class="operator">-</span> 
+                    <span class="number">1</span>
+                    <div class="tooltip">
+                        <div class="tooltip-title">Derivation from cos²x - sin²x:</div>
+                        <p>Start with cos(2x) = cos²x - sin²x</p>
+                        <p>Replace sin²x with (1 - cos²x) from sin²x + cos²x = 1:</p>
+                        <p>cos(2x) = cos²x - (1 - cos²x)</p>
+                        <p>cos(2x) = cos²x - 1 + cos²x</p>
+                        <p>cos(2x) = 2cos²x - 1</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="derivative-section">
+        <h2 class="derivative-title">Derivative Relationships</h2>
+        <div class="derivative-grid">
+            <div class="derivative-item">
+                <span class="trig-function"><span class="sin">sin</span><span class="variable">x</span></span>
+                <span class="arrow">→</span>
+                <span class="trig-function"><span class="cos">cos</span><span class="variable">x</span></span>
+            </div>
+            <div class="derivative-item">
+                <span class="trig-function"><span class="cos">cos</span><span class="variable">x</span></span>
+                <span class="arrow">→</span>
+                <span class="operator">-</span><span class="trig-function"><span class="sin">sin</span><span class="variable">x</span></span>
+            </div>
+            <div class="derivative-item">
+                <span class="trig-function"><span class="tan">tan</span><span class="variable">x</span></span>
+                <span class="arrow">→</span>
+                <span class="trig-function"><span class="sec">sec</span><span class="exponent variable">²</span><span class="variable">x</span></span>
+            </div>
+            <div class="derivative-item">
+                <span class="trig-function"><span class="cot">cot</span><span class="variable">x</span></span>
+                <span class="arrow">→</span>
+                <span class="operator">-</span><span class="trig-function"><span class="csc">csc</span><span class="exponent variable">²</span><span class="variable">x</span></span>
+            </div>
+            <div class="derivative-item">
+                <span class="trig-function"><span class="sec">sec</span><span class="variable">x</span></span>
+                <span class="arrow">→</span>
+                <span class="trig-function"><span class="sec">sec</span><span class="variable">x</span></span><span class="trig-function"><span class="tan">tan</span><span class="variable">x</span></span>
+            </div>
+            <div class="derivative-item">
+                <span class="trig-function"><span class="csc">csc</span><span class="variable">x</span></span>
+                <span class="arrow">→</span>
+                <span class="operator">-</span><span class="trig-function"><span class="csc">csc</span><span class="variable">x</span></span><span class="trig-function"><span class="cot">cot</span><span class="variable">x</span></span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="color-key">
+        <div class="color-item">
+            <div class="color-swatch" style="background-color: #e74c3c;"></div>
+            <span class="sin">sin</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background-color: #2980b9;"></div>
+            <span class="cos">cos</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background-color: #f39c12;"></div>
+            <span class="tan">tan</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background-color: #8e44ad;"></div>
+            <span class="csc">csc</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background-color: #16a085;"></div>
+            <span class="sec">sec</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background-color: #d35400;"></div>
+            <span class="cot">cot</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background-color: #2c3e50;"></div>
+            <span class="number">numbers/variables</span>
+        </div>
+        <div class="color-item">
+            <div class="color-swatch" style="background-color: #000000;"></div>
+            <span class="operator">operators/brackets</span>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Hover over identities to see how they are derived. Derived identities are highlighted in red.</p>
+    </div>
+    
+    <div class="credits">
+        <p>@theiraqies on telegram | <a href="https://t.me/iraqiestaken" target="_blank">Telegram group</a></p>
+    </div>
+
+    <script>
+        // Fit to page functionality
+        document.getElementById('fitButton').addEventListener('click', function() {
+            document.body.classList.toggle('fit-to-page');
+            this.textContent = document.body.classList.contains('fit-to-page') 
+                ? 'Normal View' 
+                : 'Fit to Page View';
+        });
+        
+        // Simple animation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const groups = document.querySelectorAll('.group');
+            groups.forEach((group, index) => {
+                group.style.opacity = '0';
+                group.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    group.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    group.style.opacity = '1';
+                    group.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
