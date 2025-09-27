@@ -3,6 +3,8 @@
 ## 🌟 Current Notes | الملاحظات الحالية
 
 - 📝 [Rules of قواعد ليس](https://iraqies.github.io/Arabic/negation)
+- 📝 [Trigonometric Cheat Sheet](https://iraqies.github.io/Maths/angles)
+  
 
 ---
 
