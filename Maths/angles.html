@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Embed Code for Trigonometric Identities Cheat Sheet -->
+    <meta name="description" content="Interactive trigonometric identities cheat sheet with color-coded formulas, derivations, and explanations. Perfect for students studying algebra, trigonometry, pre-calculus, and calculus.">
+<meta name="keywords" content="trigonometric identities, trigonometry cheat sheet, math formulas, sin cos tan, pre-calculus, calculus, math help, trigonometric functions, double angle formulas, pythagorean identities, reciprocal identities, power reducing formulas">
+<meta name="author" content="Math Education">
+<meta name="robots" content="index, follow">
 <meta property="og:title" content="Trigonometric Identities Cheat Sheet">
 <meta property="og:description" content="Color-coded trigonometric identities with interactive derivations. Perfect for students and math enthusiasts.">
 <meta property="og:image" content="../math-preview.png">
-<meta property="og:url" content="https://yourwebsite.com/trig-identities">
+<meta property="og:url" content="https://iraqies.github.io/Maths/angles">
 <meta property="og:type" content="website">
 
 <meta name="twitter:card" content="summary_large_image">
@@ -18,6 +22,94 @@
 <link rel="image_src" href="https://raw.githubusercontent.com/iraqies/iraqies.github.io/refs/heads/main/math-preview.png">
 <meta name="thumbnail" content="https://raw.githubusercontent.com/iraqies/iraqies.github.io/refs/heads/main/math-preview.png">
     <title>Trigonometric Identities Cheat Sheet</title>
+
+<!-- Structured Data for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Trigonometric Identities Cheat Sheet",
+  "description": "Comprehensive color-coded trigonometric identities with interactive derivations and explanations",
+  "image": "../math-preview.png",
+  "author": {
+    "@type": "PerOn",
+    "name": "Iraqies"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Trigonometry Resources",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "../math-preview.png"
+    }
+  },
+  "datePublished": "2025-09-30",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://iraqies.github.io/Maths/angles"
+  },
+  "keywords": [
+    "trigonometric identities",
+    "math formulas",
+    "trigonometry cheat sheet",
+    "sin cos tan",
+    "pre-calculus",
+    "calculus",
+    "double angle formulas",
+    "pythagorean identities",
+    "reciprocal identities",
+    "power reducing formulas",
+    "math education",
+    "trigonometry help",
+    "math identities",
+    "algebra formulas",
+    "trig functions",
+    "mathematics reference"
+  ],
+  "educationalLevel": ["high school", "undergraduate"],
+  "learningResourceType": "cheat sheet",
+  "subject": "Mathematics"
+}
+</script>
+
+<!-- Additional SEO Meta Tags -->
+<meta name="subject" content="Mathematics Education">
+<meta name="classification" content="Educational Resource">
+<meta name="topic" content="Trigonometric Identities and Formulas">
+<meta name="summary" content="Interactive trigonometric identities reference sheet for students">
+<meta name="url" content="https://iraqies.github.io/Maths/angles">
+<meta name="identifier-URL" content="https://iraqies.github.io/Maths/angles">
+<meta name="category" content="education, mathematics">
+<meta name="coverage" content="Worldwide">
+<meta name="distribution" content="Global">
+<meta name="language" content="EN">
+<meta name="rating" content="General">
+
+<!-- Open Graph with Keywords -->
+<meta property="og:title" content="Trigonometric Identities Cheat Sheet - Color-Coded Math Formulas">
+<meta property="og:description" content="Interactive trigonometric identities cheat sheet with color-coded formulas, derivations, and explanations. Perfect for students studying algebra, trigonometry, pre-calculus, and calculus.">
+<meta property="og:image" content="../math-preview.png">
+<meta property="og:url" content="https://yourwebsite.com/trig-identities">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Math Education Resources">
+<meta property="article:tag" content="trigonometric identities">
+<meta property="article:tag" content="math formulas">
+<meta property="article:tag" content="trigonometry">
+<meta property="article:tag" content="pre-calculus">
+<meta property="article:tag" content="calculus">
+
+<!-- Twitter Card with Keywords -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trigonometric Identities Cheat Sheet - Color-Coded Math Formulas">
+<meta name="twitter:description" content="Interactive trigonometric identities cheat sheet with color-coded formulas and derivations">
+<meta name="twitter:image" content="../math-preview.png">
+<meta name="twitter:label1" content="Category">
+<meta name="twitter:data1" content="Mathematics Education">
+<meta name="twitter:label2" content="Educational Level">
+<meta name="twitter:data2" content="High School & College">
+
+<!-- Additional SEO Headers -->
+<link rel="canonical" href="https://iraqies.github.io/Maths/angles">
     <style>
         * {
             box-sizing: border-box;
@@ -789,7 +881,192 @@
     <div class="footer">
         <p>Hover over identities to see how they are derived. Derived identities are highlighted in red.</p>
     </div>
+    <!-- Add this to your HTML where you want the counter to appear -->
+<div class="visitor-counter">
+    <div class="counter-container">
+        <span class="counter-icon">👁️</span>
+        <span class="counter-label">Visitors:</span>
+        <span class="counter-number" id="visitorCount">0</span>
+    </div>
+</div>
+
+<style>
+.visitor-counter {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.counter-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px 20px;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border: 2px solid #3498db;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    backdrop-filter: blur(10px);
+    animation: slideInUp 0.5s ease-out;
+}
+
+.counter-icon {
+    font-size: 1.2rem;
+    animation: pulse 2s infinite;
+}
+
+.counter-label {
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.counter-number {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 1rem;
+    min-width: 60px;
+    text-align: center;
+    animation: countUp 0.5s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes countUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .visitor-counter {
+        bottom: 10px;
+        right: 10px;
+    }
     
+    .counter-container {
+        padding: 8px 15px;
+        gap: 8px;
+    }
+    
+    .counter-label {
+        font-size: 0.8rem;
+    }
+    
+    .counter-number {
+        font-size: 0.9rem;
+        min-width: 50px;
+        padding: 3px 10px;
+    }
+}
+</style>
+
+<script>
+// Visitor counter functionality
+class VisitorCounter {
+    constructor() {
+        this.storageKey = 'trigCheatSheetVisitors';
+        this.counterElement = document.getElementById('visitorCount');
+        this.init();
+    }
+
+    init() {
+        let count = this.getVisitorCount();
+        count++;
+        this.saveVisitorCount(count);
+        this.displayCount(count);
+        
+        // Update counter every 30 seconds to catch multiple tabs
+        setInterval(() => {
+            const currentCount = this.getVisitorCount();
+            this.displayCount(currentCount);
+        }, 30000);
+    }
+
+    getVisitorCount() {
+        if (typeof Storage !== 'undefined') {
+            return parseInt(localStorage.getItem(this.storageKey)) || 0;
+        }
+        return 0;
+    }
+
+    saveVisitorCount(count) {
+        if (typeof Storage !== 'undefined') {
+            localStorage.setItem(this.storageKey, count.toString());
+        }
+    }
+
+    displayCount(count) {
+        if (this.counterElement) {
+            // Animate the counter
+            this.animateValue(this.counterElement, parseInt(this.counterElement.textContent) || 0, count, 1000);
+        }
+    }
+
+    animateValue(element, start, end, duration) {
+        const startTime = performance.now();
+        
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function for smooth animation
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            const value = Math.floor(start + (end - start) * easeOutQuart);
+            
+            element.textContent = value.toLocaleString();
+            
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            }
+        }
+        
+        requestAnimationFrame(update);
+    }
+}
+
+// Initialize the counter when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    new VisitorCounter();
+});
+
+// Alternative: Simple version without animation
+/*
+let visitorCount = localStorage.getItem('visitorCount') || 0;
+visitorCount = parseInt(visitorCount) + 1;
+localStorage.setItem('visitorCount', visitorCount);
+document.getElementById('visitorCount').textContent = visitorCount.toLocaleString();
+*/
+</script>
     <div class="credits">
         <p>Made by @Theiraqies | <a href="https://t.me/iraqiestaken" target="_blank">Telegram Channel</a></p>
     </div>
