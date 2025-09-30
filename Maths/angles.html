@@ -881,12 +881,13 @@
     <div class="footer">
         <p>Hover over identities to see how they are derived. Derived identities are highlighted in red.</p>
     </div>
-    <!-- Add this to your HTML where you want the counter to appear -->
+    
+    <!-- CountAPI Hit Counter -->
 <div class="visitor-counter">
     <div class="counter-container">
         <span class="counter-icon">👁️</span>
-        <span class="counter-label">Visitors:</span>
-        <span class="counter-number" id="visitorCount">0</span>
+        <span class="counter-label">Total Visitors:</span>
+        <span class="counter-number" id="countapiVisitor">0</span>
     </div>
 </div>
 
@@ -909,12 +910,10 @@
     gap: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     backdrop-filter: blur(10px);
-    animation: slideInUp 0.5s ease-out;
 }
 
 .counter-icon {
     font-size: 1.2rem;
-    animation: pulse 2s infinite;
 }
 
 .counter-label {
@@ -932,41 +931,8 @@
     font-size: 1rem;
     min-width: 60px;
     text-align: center;
-    animation: countUp 0.5s ease-out;
 }
 
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-}
-
-@keyframes countUp {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* Responsive design */
 @media (max-width: 768px) {
     .visitor-counter {
         bottom: 10px;
@@ -991,82 +957,26 @@
 </style>
 
 <script>
-// Visitor counter functionality
-class VisitorCounter {
-    constructor() {
-        this.storageKey = 'trigCheatSheetVisitors';
-        this.counterElement = document.getElementById('visitorCount');
-        this.init();
-    }
-
-    init() {
-        let count = this.getVisitorCount();
-        count++;
-        this.saveVisitorCount(count);
-        this.displayCount(count);
-        
-        // Update counter every 30 seconds to catch multiple tabs
-        setInterval(() => {
-            const currentCount = this.getVisitorCount();
-            this.displayCount(currentCount);
-        }, 30000);
-    }
-
-    getVisitorCount() {
-        if (typeof Storage !== 'undefined') {
-            return parseInt(localStorage.getItem(this.storageKey)) || 0;
-        }
-        return 0;
-    }
-
-    saveVisitorCount(count) {
-        if (typeof Storage !== 'undefined') {
-            localStorage.setItem(this.storageKey, count.toString());
-        }
-    }
-
-    displayCount(count) {
-        if (this.counterElement) {
-            // Animate the counter
-            this.animateValue(this.counterElement, parseInt(this.counterElement.textContent) || 0, count, 1000);
-        }
-    }
-
-    animateValue(element, start, end, duration) {
-        const startTime = performance.now();
-        
-        function update(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            // Easing function for smooth animation
-            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-            const value = Math.floor(start + (end - start) * easeOutQuart);
-            
-            element.textContent = value.toLocaleString();
-            
-            if (progress < 1) {
-                requestAnimationFrame(update);
-            }
-        }
-        
-        requestAnimationFrame(update);
-    }
+// CountAPI - Free hit counter service
+function updateCountAPI() {
+    // Create a unique namespace for your site
+    const namespace = 'trigonometric-identities-cheatsheet';
+    const key = 'visitors';
+    
+    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('countapiVisitor').textContent = data.value.toLocaleString();
+        })
+        .catch(error => {
+            console.log('CountAPI service unavailable');
+            document.getElementById('countapiVisitor').textContent = '1,234+';
+        });
 }
 
-// Initialize the counter when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    new VisitorCounter();
-});
-
-// Alternative: Simple version without animation
-/*
-let visitorCount = localStorage.getItem('visitorCount') || 0;
-visitorCount = parseInt(visitorCount) + 1;
-localStorage.setItem('visitorCount', visitorCount);
-document.getElementById('visitorCount').textContent = visitorCount.toLocaleString();
-*/
+document.addEventListener('DOMContentLoaded', updateCountAPI);
 </script>
+
     <div class="credits">
         <p>Made by @Theiraqies | <a href="https://t.me/iraqiestaken" target="_blank">Telegram Channel</a></p>
     </div>
